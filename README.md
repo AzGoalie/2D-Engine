@@ -5,5 +5,5 @@ A Dice Wars clone
 
 
 ## Requirements
-SDL2
-SDL2 image
+* SDL2
+* SDL2 image
