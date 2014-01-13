@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <map>
 #include <string>
 
@@ -23,7 +23,7 @@ public:
 	static App* GetInstance();  // Singleton access
 	~App();
 
-	void Init(const char* title, int width, int height, int major, int minor);
+	void Init(const char* title, int width, int height);
 	void Shutdown();
 
 	void Start();

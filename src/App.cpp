@@ -1,6 +1,8 @@
 #include "App.h"
 #include "IScene.h"
 
+#include <SDL_image.h>
+
 #include <iostream>
 using std::cout;
 using std::endl;
@@ -18,12 +20,7 @@ App::App()
 
 App::~App()
 {
-	// Do nothing, everything should be called in Shutdown except delete the instance
-	if (pInstance != nullptr)
-	{
-		delete pInstance;
-		pInstance = nullptr;
-	}
+	// Do nothing, everything should be called in Shutdown()
 }
 
 App* App::GetInstance()
@@ -33,12 +30,20 @@ App* App::GetInstance()
 	return pInstance;
 }
 
-void App::Init(const char* title, int width, int height, int major, int minor)
+void App::Init(const char* title, int width, int height)
 {
 	// Initialize SDL
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)   // If not 0 then an error occured
 	{
         Error("Failed to initialize SDL");
+		exit(EXIT_FAILURE);
+	}
+
+	// Initialize SDL_image
+	int imgFlags = IMG_INIT_PNG;
+	if(!(IMG_Init(imgFlags) & imgFlags))	// IMG_Init returns the flags that were successful, so we must and them
+	{
+		Error("Failed to initialize SDL_image");
 		exit(EXIT_FAILURE);
 	}
 
@@ -66,34 +71,41 @@ void App::Shutdown()
 	{
 		std::map<std::string, IScene*>::iterator iter;
 		for (iter = m_Scenes.begin(); iter != m_Scenes.end(); m_Scenes.erase(iter++)) {
-			if (iter->second != NULL) {
+			if (iter->second != nullptr) {
 				iter->second->Shutdown();
 				delete iter->second;
-				iter->second = NULL;
+				iter->second = nullptr;
 			}
 		}
 	}
 
 	pActiveScene = nullptr;
 
-    // Cleanop on aisle 6
+    // Cleanup on aisle 6
     SDL_DestroyRenderer(m_pRenderer);
     SDL_DestroyWindow(m_pWindow);
     SDL_Quit();
+
+	// Delete the instance
+	if (pInstance != nullptr)
+	{
+		delete pInstance;
+		pInstance = nullptr;
+	}
 }
 
 void App::Start()
 {
 	// Timing vars
-	double currentTime = GetTime();
-	double newTime = 0;
-	double delta = 0;
+	int currentTime = GetTime();
+	int newTime = 0;
+	int delta = 0;
 
 	// Frame timing vars
 #ifdef _DEBUG
 	int FPS = 0;
 	int frames = 0;
-	double lastFPSCheck = 0;
+	int lastFPSCheck = 0;
 #endif
     
     // Quit flag and Event struct
@@ -129,7 +141,7 @@ void App::Start()
 
 #ifdef _DEBUG
         frames++;
-		if (currentTime - lastFPSCheck >= 1)
+		if (currentTime - lastFPSCheck >= 1000)
 		{
 			cout << "FPS: " << frames << endl;
 			frames = 0;

@@ -3,7 +3,7 @@
 void TestScene::Init(App *app)
 {
 	BasicScene::Init(app);
-    app->SetRenderDrawColor(255, 0, 0, 255);
+	test.LoadFile("data/test.png", app->GetRenderer());
 }
 
 void TestScene::Shutdown()
@@ -11,12 +11,12 @@ void TestScene::Shutdown()
     
 }
 
-void TestScene::Update(double delta)
+void TestScene::Update(int delta)
 {
-
 }
 
 void TestScene::Render()
 {
-    app->Clear();
+	app->Clear();
+	test.Render(0, 0);
 }

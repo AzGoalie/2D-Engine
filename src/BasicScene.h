@@ -14,7 +14,7 @@ public:
 	virtual void Shutdown();
 
     virtual void HandleInput(SDL_Event e);
-	virtual void Update(double delta) = 0;
+	virtual void Update(int delta) = 0;
 	virtual void Render() = 0;
 
 	virtual void Pause();

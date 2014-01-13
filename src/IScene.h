@@ -11,7 +11,7 @@ public:
 	virtual void Init(App *app) = 0;
 	virtual void Shutdown() = 0;
 
-	virtual void Update(double delta) = 0;
+	virtual void Update(int delta) = 0;
 	virtual void Render() = 0;
 
 	virtual void Pause() = 0;
