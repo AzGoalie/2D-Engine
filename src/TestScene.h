@@ -8,7 +8,7 @@
 class TestScene : public BasicScene
 {
 private:
-	Texture test;
+	Texture *test;
 
 public:
     

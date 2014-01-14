@@ -1,5 +1,6 @@
 #include "Texture.h"
 #include <SDL_image.h>
+#include <iostream>
 
 Texture::Texture()
 {
@@ -24,7 +25,7 @@ Texture::~Texture()
 	m_Height = 0;
 }
 
-bool Texture::LoadFile(const char* filename, SDL_Renderer* renderer)
+bool Texture::LoadFile(std::string filename, SDL_Renderer* renderer)
 {
 	// Check to make sure we're not already bound
 	if (m_pTexture)
@@ -33,9 +34,12 @@ bool Texture::LoadFile(const char* filename, SDL_Renderer* renderer)
 		m_pTexture = nullptr;
 	}
 
-	m_pTexture = IMG_LoadTexture(renderer, filename);
+	m_pTexture = IMG_LoadTexture(renderer, filename.c_str());
 	if (!m_pTexture)
+	{
+		std::cout << "Error loading image '" << filename << "': " << IMG_GetError() << std::endl;
 		return false;
+	}
 
 	// Get width and height
 	SDL_QueryTexture(m_pTexture, NULL, NULL, &m_Width, &m_Height);
@@ -59,4 +63,12 @@ void Texture::Render(int x, int y, SDL_Rect* clip)
 	}
 
 	SDL_RenderCopy(m_pRenderer, m_pTexture, clip, &rect);
+}
+
+void Texture::SetColor(Uint8 r, Uint8 g, Uint8 b)
+{
+	if (m_pTexture)
+	{
+		SDL_SetTextureColorMod(m_pTexture, r, g, b);
+	}
 }

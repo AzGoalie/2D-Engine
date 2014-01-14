@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SDL.h>
+#include <string>
 
 class Texture
 {
@@ -14,6 +15,7 @@ public:
 	Texture();
 	~Texture();
 
-	bool LoadFile(const char* filename, SDL_Renderer* renderer);
+	bool LoadFile(std::string filename, SDL_Renderer* renderer);
 	void Render(int x, int y, SDL_Rect* clip = NULL);
+	void SetColor(Uint8 r, Uint8 g, Uint8 b);
 };

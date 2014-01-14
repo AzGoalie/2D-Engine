@@ -5,9 +5,7 @@
 
 // Memory leak checks
 #ifdef _DEBUG
-	#define _CRTDBG_MAP_ALLOC
-	#include <stdlib.h>
-	#include <crtdbg.h>
+#include <vld.h>
 #endif
 
 int main(int argc, char *argv[])
@@ -27,8 +25,5 @@ int main(int argc, char *argv[])
     // When finished, cleanup
 	app->Shutdown();
 
-#ifdef _DEBUG
-	_CrtDumpMemoryLeaks();
-#endif
 	return 0;
 }

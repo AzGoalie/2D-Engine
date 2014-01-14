@@ -1,11 +1,13 @@
 #include "App.h"
 #include "IScene.h"
 
-#include <SDL_image.h>
-
 #include <iostream>
 using std::cout;
 using std::endl;
+
+// Declare the global game managers
+TextureManager g_TextureManager;
+
 
 // Initailze static members
 App* App::pInstance = nullptr;
@@ -39,14 +41,6 @@ void App::Init(const char* title, int width, int height)
 		exit(EXIT_FAILURE);
 	}
 
-	// Initialize SDL_image
-	int imgFlags = IMG_INIT_PNG;
-	if(!(IMG_Init(imgFlags) & imgFlags))	// IMG_Init returns the flags that were successful, so we must and them
-	{
-		Error("Failed to initialize SDL_image");
-		exit(EXIT_FAILURE);
-	}
-
     // Create our window
     m_pWindow = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, 0);
 	if (!m_pWindow)
@@ -62,6 +56,13 @@ void App::Init(const char* title, int width, int height)
         Error("Failed to create renderer");
         exit(EXIT_FAILURE);
     }
+
+	// Initialize the TextureManager
+	if (!g_TextureManager.Init(m_pRenderer))
+	{
+		Error("Failed to initalize the TextureManager");
+		exit(EXIT_FAILURE);
+	}
 }
 
 void App::Shutdown()
@@ -81,13 +82,16 @@ void App::Shutdown()
 
 	pActiveScene = nullptr;
 
+	// Shutdown all the managers
+	g_TextureManager.Shutdown();
+
     // Cleanup on aisle 6
     SDL_DestroyRenderer(m_pRenderer);
     SDL_DestroyWindow(m_pWindow);
     SDL_Quit();
 
 	// Delete the instance
-	if (pInstance != nullptr)
+	if (pInstance)
 	{
 		delete pInstance;
 		pInstance = nullptr;

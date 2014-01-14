@@ -3,8 +3,12 @@
 #include <SDL.h>
 #include <map>
 #include <string>
+#include "TextureManager.h"
 
 class IScene;
+
+// Global game managers
+extern TextureManager g_TextureManager;
 
 class App
 {
