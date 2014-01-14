@@ -30,7 +30,7 @@ bool Texture::LoadFile(std::string filename, SDL_Renderer* renderer)
 	// Check to make sure we're not already bound
 	if (m_pTexture)
 	{
-        	SDL_DestroyTexture(m_pTexture)
+        	SDL_DestroyTexture(m_pTexture);
 		m_pTexture = nullptr;
 	}
 
