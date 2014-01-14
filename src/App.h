@@ -34,7 +34,7 @@ public:
 
 	void AddScene(std::string name, IScene* Scene);
 	void ChangeScene(std::string name);	// Goto a specific Scene
-	// void NextScene();						// Goes to the next Scene in the map
+    void NextScene();					// Goes to the next Scene in the map
 	IScene* GetCurrentScene() { return pActiveScene; }
 
     void Clear();

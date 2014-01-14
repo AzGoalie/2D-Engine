@@ -182,28 +182,29 @@ void App::ChangeScene(std::string name)
 	}
 }
 
-//void App::NextScene()
-//{
-//	// TODO: Find a better way to goto the next Scene...
-//	if (pActiveScene != nullptr)
-//	{
-//		std::map<std::string, IScene*>::iterator iter;
-//		for (iter = m_Scenes.begin(); iter != m_Scenes.end(); ++iter) {
-//			if (iter->second == pActiveScene)
-//			{
-//				pActiveScene->Pause();
-//				pActiveScene = ++iter->second;
-//				pActiveScene->Resume();
-//				break;
-//			}
-//		}
-//
-//		// If we are here, then it was the last Scene, goto the first
-//		pActiveScene->Pause();
-//		pActiveScene = m_Scenes.begin()->second;
-//		pActiveScene->Resume();
-//	}
-//}
+void App::NextScene()
+{
+	// TODO: Find a better way to goto the next Scene...
+	if (pActiveScene != nullptr)
+	{
+		std::map<std::string, IScene*>::iterator iter;
+		for (iter = m_Scenes.begin(); iter != m_Scenes.end(); ++iter) {
+			if (iter->second == pActiveScene)
+			{
+                iter++;
+				pActiveScene->Pause();
+				pActiveScene = iter->second;
+				pActiveScene->Resume();
+				retrun;
+			}
+		}
+
+		// If we are here, then it was the last Scene, goto the first
+		pActiveScene->Pause();
+		pActiveScene = m_Scenes.begin()->second;
+		pActiveScene->Resume();
+	}
+}
 
 void App::Clear()
 {
