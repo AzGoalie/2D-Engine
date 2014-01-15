@@ -50,19 +50,22 @@ bool Texture::LoadFile(std::string filename, SDL_Renderer* renderer)
 
 void Texture::Render(int x, int y, SDL_Rect* clip)
 {
-	SDL_Rect rect;
-	rect.x = x;
-	rect.y = y;
-	rect.w = m_Width;
-	rect.h = m_Height;
-
-	if (clip)
+	if (m_pTexture)
 	{
-		rect.w = clip->w;
-		rect.h = clip->h;
-	}
+		SDL_Rect rect;
+		rect.x = x;
+		rect.y = y;
+		rect.w = m_Width;
+		rect.h = m_Height;
 
-	SDL_RenderCopy(m_pRenderer, m_pTexture, clip, &rect);
+		if (clip)
+		{
+			rect.w = clip->w;
+			rect.h = clip->h;
+		}
+
+		SDL_RenderCopy(m_pRenderer, m_pTexture, clip, &rect);
+	}
 }
 
 void Texture::SetColor(Uint8 r, Uint8 g, Uint8 b)
