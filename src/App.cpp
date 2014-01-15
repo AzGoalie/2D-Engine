@@ -195,7 +195,7 @@ void App::NextScene()
 				pActiveScene->Pause();
 				pActiveScene = iter->second;
 				pActiveScene->Resume();
-				retrun;
+				return;
 			}
 		}
 
