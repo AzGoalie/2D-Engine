@@ -34,6 +34,18 @@ void TextureManager::Shutdown()
 			}
 		}
 	}
+
+	// Delete all fonts
+	if (!m_Fonts.empty())
+	{
+		std::map<std::string, Font*>::iterator iter;
+		for (iter = m_Fonts.begin(); iter != m_Fonts.end(); m_Fonts.erase(iter++)) {
+			if (iter->second != nullptr) {
+				delete iter->second;
+				iter->second = nullptr;
+			}
+		}
+	}
 }
 
 void TextureManager::LoadTexture(std::string filename)
@@ -44,9 +56,7 @@ void TextureManager::LoadTexture(std::string filename)
 	if (m_pRenderer)
 	{
 		Texture *texture = new Texture;
-		if (!texture || !texture->LoadFile(filename, m_pRenderer))
-			return;
-
+		texture->LoadFile(filename, m_pRenderer);	// TODO: do something if it fails
 		m_Textures[filename] = texture;
 	}
 
@@ -63,4 +73,30 @@ Texture* TextureManager::GetTexture(std::string filename)
 		LoadTexture(filename); 
 
 	return m_Textures[filename];
+}
+
+void TextureManager::LoadFont(std::string fntFile)
+{
+	if (fntFile == "")
+		return;
+	if (m_pRenderer)
+	{
+		Font *font = new Font;
+		font->LoadFont(fntFile, m_pRenderer);
+		m_Fonts[fntFile] = font;
+	}
+
+	else
+		std::cout << "Error loading font '"  << fntFile << "': No renderer!" << std::endl;
+}
+
+Font* TextureManager::GetFont(std::string fntFile)
+{
+	if(fntFile == "") 
+		return nullptr;
+
+	if(m_Fonts.find(fntFile) == m_Fonts.end()) 
+		LoadFont(fntFile); 
+
+	return m_Fonts[fntFile];
 }

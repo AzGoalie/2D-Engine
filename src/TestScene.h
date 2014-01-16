@@ -2,6 +2,7 @@
 
 #include "BasicScene.h"
 #include "Texture.h"
+#include "Font.h"
 
 // Simple example scene to show how to use the framework
 
@@ -9,6 +10,7 @@ class TestScene : public BasicScene
 {
 private:
 	Texture *test;
+	Font font;
 
 public:
     
