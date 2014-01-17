@@ -118,11 +118,8 @@ bool Font::LoadFont(string fntFile, SDL_Renderer *renderer)
 						converter >> m_Charset.chars[charID].width;
 					else if (key == "height")
 						converter >> m_Charset.chars[charID].height;
-					else if (key == "xoffset"){
+					else if (key == "xoffset")
 						converter >> m_Charset.chars[charID].xOffset;
-						if (m_Charset.chars[charID].xOffset == 65535)
-							std::cout << charID << std::endl;
-					}
 					else if (key == "yoffset")
 						converter >> m_Charset.chars[charID].yOffset;
 					else if (key == "xadvance")
