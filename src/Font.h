@@ -32,9 +32,9 @@ class Font
 {
 private:
 	Charset m_Charset;
-
-public:
 	Texture *m_pBitmap;
+	
+public:
 	Font();
 	~Font();
 
