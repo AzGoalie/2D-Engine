@@ -1,13 +1,13 @@
-#include "TextureManager.h"
+#include "ResourceManager.h"
 #include <iostream>
-#include <SDL_image.h>
+#include <SDL2_image/SDL_image.h>
 
-TextureManager::TextureManager()
+ResourceManager::ResourceManager()
 {
 	m_pRenderer = nullptr;
 }
 
-bool TextureManager::Init(SDL_Renderer *renderer)
+bool ResourceManager::Init(SDL_Renderer *renderer)
 {
 	// Initialize SDL_image
 	int imgFlags = IMG_INIT_PNG;
@@ -17,11 +17,19 @@ bool TextureManager::Init(SDL_Renderer *renderer)
 		return false;
 	}
 
+    // Find the base path
+    BASE_PATH = SDL_GetBasePath();
+    if (!BASE_PATH)
+    {
+        std::cout << "Failed to find base path" << std::endl;
+        return false;
+    }
+    
 	m_pRenderer = renderer;
 	return true;
 }
 
-void TextureManager::Shutdown()
+void ResourceManager::Shutdown()
 {
 	// Delete all textures
 	if (!m_Textures.empty())
@@ -46,9 +54,12 @@ void TextureManager::Shutdown()
 			}
 		}
 	}
+    
+    // Delete base path
+    SDL_free(BASE_PATH);
 }
 
-void TextureManager::LoadTexture(std::string filename)
+void ResourceManager::LoadTexture(std::string filename)
 {
 	if(filename == "") 
 		return;
@@ -64,7 +75,7 @@ void TextureManager::LoadTexture(std::string filename)
 		std::cout << "Error loading texture '"  << filename << "': No renderer!" << std::endl;
 }
 
-Texture* TextureManager::GetTexture(std::string filename)
+Texture* ResourceManager::GetTexture(std::string filename)
 {
 	if(filename == "") 
 		return nullptr;
@@ -75,14 +86,15 @@ Texture* TextureManager::GetTexture(std::string filename)
 	return m_Textures[filename];
 }
 
-void TextureManager::LoadFont(std::string fntFile)
+void ResourceManager::LoadFont(std::string fntFile)
 {
 	if (fntFile == "")
 		return;
+    
 	if (m_pRenderer)
 	{
 		Font *font = new Font;
-		font->LoadFont(fntFile, m_pRenderer);
+		font->LoadFont(BASE_PATH + fntFile, m_pRenderer);
 		m_Fonts[fntFile] = font;
 	}
 
@@ -90,7 +102,7 @@ void TextureManager::LoadFont(std::string fntFile)
 		std::cout << "Error loading font '"  << fntFile << "': No renderer!" << std::endl;
 }
 
-Font* TextureManager::GetFont(std::string fntFile)
+Font* ResourceManager::GetFont(std::string fntFile)
 {
 	if(fntFile == "") 
 		return nullptr;

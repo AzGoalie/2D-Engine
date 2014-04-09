@@ -1,14 +1,14 @@
 #pragma once
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include <map>
 #include <string>
-#include "TextureManager.h"
+#include "ResourceManager.h"
 
 class IScene;
 
 // Global game managers
-extern TextureManager g_TextureManager;
+extern ResourceManager g_ResourceManager;
 
 class App
 {

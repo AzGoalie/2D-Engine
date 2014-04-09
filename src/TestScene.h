@@ -10,7 +10,7 @@ class TestScene : public BasicScene
 {
 private:
 	Texture *test;
-	Font font;
+	Font *font;
 
 public:
     

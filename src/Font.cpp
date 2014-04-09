@@ -75,7 +75,7 @@ bool Font::LoadFont(string fntFile, SDL_Renderer *renderer)
 					key = read.substr(0, i);
 					value = read.substr(i+1);
 
-					// assign th correct value
+					// assign the correct value
 					converter << value;
 					if (key == "file")
 					{

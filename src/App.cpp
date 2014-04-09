@@ -6,7 +6,7 @@ using std::cout;
 using std::endl;
 
 // Declare the global game managers
-TextureManager g_TextureManager;
+ResourceManager g_ResourceManager;
 
 
 // Initailze static members
@@ -58,7 +58,7 @@ void App::Init(const char* title, int width, int height)
     }
 
 	// Initialize the TextureManager
-	if (!g_TextureManager.Init(m_pRenderer))
+	if (!g_ResourceManager.Init(m_pRenderer))
 	{
 		Error("Failed to initalize the TextureManager");
 		exit(EXIT_FAILURE);
@@ -83,7 +83,7 @@ void App::Shutdown()
 	pActiveScene = nullptr;
 
 	// Shutdown all the managers
-	g_TextureManager.Shutdown();
+	g_ResourceManager.Shutdown();
 
     // Cleanup on aisle 6
     SDL_DestroyRenderer(m_pRenderer);
