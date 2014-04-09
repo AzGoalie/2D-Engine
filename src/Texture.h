@@ -1,6 +1,11 @@
 #pragma once
 
-#include <SDL2/SDL.h>
+#ifdef __APPLE__
+    #include <SDL2/SDL.h>
+#else
+    #include <SDL.h>
+#endif
+
 #include <string>
 
 class Texture

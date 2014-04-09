@@ -1,6 +1,11 @@
 #include "ResourceManager.h"
 #include <iostream>
-#include <SDL2_image/SDL_image.h>
+
+#ifdef __APPLE__
+    #include <SDL2_image/SDL_image.h>
+#else
+    #include <SDL_image.h>
+#endif
 
 ResourceManager::ResourceManager()
 {
