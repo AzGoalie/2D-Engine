@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "App.h"
-#include "TestScene.h"
+#include "tests/Tests.h"
 
 // Memory leak checks
 #ifdef _DEBUG

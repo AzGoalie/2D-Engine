@@ -24,4 +24,5 @@ void TestScene::Render()
 	font->Render(0, 40, "1234567890");
 	font->Render(0, 60, "~!@#$%^&*()_+-=/\\><.,");
 	font->Render(100, 100, 65532);	// Obj symbol
+    font->Render(0, 200, "The quick brown fox jumped over the lazy dog");
 }
