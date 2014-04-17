@@ -3,8 +3,8 @@
 void TestScene::Init(App *app)
 {
 	BasicScene::Init(app);
-	test = g_ResourceManager.GetTexture("data/test.png");
-	font = g_ResourceManager.GetFont("data/fonts/arial.fnt");
+	test = g_ResourceManager.GetTexture("data/tests/test.png");
+	font = g_ResourceManager.GetFont("data/tests/fonts/arial.fnt");
 }
 
 void TestScene::Shutdown()

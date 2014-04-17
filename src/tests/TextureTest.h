@@ -1,7 +1,7 @@
 #pragma once
 
-#include "BasicScene.h"
-#include "Texture.h"
+#include "../BasicScene.h"
+#include "../Texture.h"
 
 // Simple test for textures
 

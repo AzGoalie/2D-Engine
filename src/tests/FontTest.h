@@ -1,7 +1,7 @@
 #pragma once
 
-#include "BasicScene.h"
-#include "Font.h"
+#include "../BasicScene.h"
+#include "../Font.h"
 
 // Simple test for fonts
 

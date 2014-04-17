@@ -79,10 +79,21 @@ bool Font::LoadFont(string fntFile, SDL_Renderer *renderer)
 					converter << value;
 					if (key == "file")
 					{
+						// find base name
+						string tmp = fntFile;
+						for (int i = tmp.size(); i > 0; i--)
+						{
+							if (tmp[i] == '/' || tmp[i] == '\\')
+							{
+								tmp.erase(i+1, tmp.size());
+								break;
+							}
+						}
+
 						converter >> filename;
 						// Remove quotation marks around filename
 						filename = filename.substr(1, filename.size()-2);
-						filename = "data/fonts/" + filename;	// TODO: remove hard coded value
+						filename = tmp + filename;
 					}
 				}
 

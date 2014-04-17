@@ -3,7 +3,7 @@
 void FontTest::Init(App *app)
 {
 	BasicScene::Init(app);
-	font = g_ResourceManager.GetFont("data/fonts/arial.fnt");
+	font = g_ResourceManager.GetFont("data/tests/fonts/arial.fnt");
 }
 
 void FontTest::Shutdown()

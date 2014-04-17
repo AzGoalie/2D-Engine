@@ -3,8 +3,8 @@
 void TextureTest::Init(App *app)
 {
 	BasicScene::Init(app);
-	texture1 = g_ResourceManager.GetTexture("data/test.png");
-    texture2 = g_ResourceManager.GetTexture("data/img_test.png");
+	texture1 = g_ResourceManager.GetTexture("data/tests/test.png");
+    texture2 = g_ResourceManager.GetTexture("data/tests/img_test.png");
     
 }
 

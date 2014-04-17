@@ -1,8 +1,8 @@
 #pragma once
 
-#include "BasicScene.h"
-#include "Texture.h"
-#include "Font.h"
+#include "../BasicScene.h"
+#include "../Texture.h"
+#include "../Font.h"
 
 // Simple example scene to show how to use the framework
 
